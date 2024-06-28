@@ -1,0 +1,45 @@
+2024-06-28 13:20:23.086 +04:00  INF  Now listening on: http://localhost:5281
+2024-06-28 13:20:23.137 +04:00  INF  Application started. Press Ctrl+C to shut down.
+2024-06-28 13:20:23.138 +04:00  INF  Hosting environment: Development
+2024-06-28 13:20:23.138 +04:00  INF  Content root path: C:\Users\user\Desktop\PB101\Backend\Class_Practice\CourseApp\CourseApp\
+2024-06-28 13:20:23.475 +04:00  INF  Request starting HTTP/1.1 GET http://localhost:5281/swagger/index.html - -
+2024-06-28 13:20:24.028 +04:00  INF  Request finished HTTP/1.1 GET http://localhost:5281/swagger/index.html - - - 200 - text/html;charset=utf-8 558.2944ms
+2024-06-28 13:20:24.037 +04:00  INF  Request starting HTTP/1.1 GET http://localhost:5281/_vs/browserLink - -
+2024-06-28 13:20:24.099 +04:00  INF  Request starting HTTP/1.1 GET http://localhost:5281/_framework/aspnetcore-browser-refresh.js - -
+2024-06-28 13:20:24.102 +04:00  INF  Request finished HTTP/1.1 GET http://localhost:5281/_framework/aspnetcore-browser-refresh.js - - - 200 11988 application/javascript;+charset=utf-8 3.0414ms
+2024-06-28 13:20:24.147 +04:00  INF  Request finished HTTP/1.1 GET http://localhost:5281/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 110.5071ms
+2024-06-28 13:20:24.217 +04:00  INF  Request starting HTTP/1.1 GET http://localhost:5281/swagger/v1/swagger.json - -
+2024-06-28 13:20:24.354 +04:00  INF  Request finished HTTP/1.1 GET http://localhost:5281/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 137.3802ms
+2024-06-28 13:20:35.793 +04:00  INF  Request starting HTTP/1.1 GET http://localhost:5281/api/admin/Student/GetAll - -
+2024-06-28 13:20:35.804 +04:00  WRN  Failed to determine the https port for redirect.
+2024-06-28 13:20:35.812 +04:00  INF  Executing endpoint 'CourseApp.Controllers.Admin.StudentController.GetAll (CourseApp)'
+2024-06-28 13:20:35.856 +04:00  INF  Route matched with {action = "GetAll", controller = "Student"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller CourseApp.Controllers.Admin.StudentController (CourseApp).
+2024-06-28 13:20:37.681 +04:00  INF  Entity Framework Core 6.0.31 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.31' with options: None
+2024-06-28 13:20:37.684 +04:00  INF  Get All method is working
+2024-06-28 13:20:39.819 +04:00  INF  Executed DbCommand (77ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[Id], [s].[Address], [s].[Age], [s].[CreatedDate], [s].[Email], [s].[Name], [s].[SoftDelete], [s].[Surname], [t].[Id], [t].[GroupId], [t].[StudentId], [t].[Id0], [t].[Capacity], [t].[CreatedDate], [t].[Name], [t].[SoftDelete]
+FROM [Students] AS [s]
+LEFT JOIN (
+    SELECT [s0].[Id], [s0].[GroupId], [s0].[StudentId], [g].[Id] AS [Id0], [g].[Capacity], [g].[CreatedDate], [g].[Name], [g].[SoftDelete]
+    FROM [StudentGroups] AS [s0]
+    INNER JOIN [Groups] AS [g] ON [s0].[GroupId] = [g].[Id]
+) AS [t] ON [s].[Id] = [t].[StudentId]
+ORDER BY [s].[Id], [t].[Id]
+2024-06-28 13:20:39.901 +04:00  INF  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Service.DTOs.Admin.Students.StudentDto, Service, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-06-28 13:20:39.915 +04:00  INF  Executed action CourseApp.Controllers.Admin.StudentController.GetAll (CourseApp) in 4051.3593ms
+2024-06-28 13:20:39.915 +04:00  INF  Executed endpoint 'CourseApp.Controllers.Admin.StudentController.GetAll (CourseApp)'
+2024-06-28 13:20:39.921 +04:00  INF  Request finished HTTP/1.1 GET http://localhost:5281/api/admin/Student/GetAll - - - 200 - application/json;+charset=utf-8 4127.9632ms
+2024-06-28 13:21:24.493 +04:00  INF  Request starting HTTP/1.1 GET http://localhost:5281/api/admin/Group/GetAll - -
+2024-06-28 13:21:24.494 +04:00  INF  Executing endpoint 'CourseApp.Controllers.Admin.GroupController.GetAll (CourseApp)'
+2024-06-28 13:21:24.499 +04:00  INF  Route matched with {action = "GetAll", controller = "Group"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller CourseApp.Controllers.Admin.GroupController (CourseApp).
+2024-06-28 13:21:24.559 +04:00  INF  Entity Framework Core 6.0.31 initialized 'AppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.31' with options: None
+2024-06-28 13:21:24.559 +04:00  INF  Get All method is working
+2024-06-28 13:21:24.594 +04:00  INF  Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [g].[Id], [g].[Capacity], [g].[CreatedDate], [g].[Name], [g].[SoftDelete], [s].[Id], [s].[GroupId], [s].[StudentId]
+FROM [Groups] AS [g]
+LEFT JOIN [StudentGroups] AS [s] ON [g].[Id] = [s].[GroupId]
+ORDER BY [g].[Id]
+2024-06-28 13:21:24.603 +04:00  INF  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Service.DTOs.Admin.Groups.GroupDto, Service, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-06-28 13:21:24.610 +04:00  INF  Executed action CourseApp.Controllers.Admin.GroupController.GetAll (CourseApp) in 111.4869ms
+2024-06-28 13:21:24.610 +04:00  INF  Executed endpoint 'CourseApp.Controllers.Admin.GroupController.GetAll (CourseApp)'
+2024-06-28 13:21:24.611 +04:00  INF  Request finished HTTP/1.1 GET http://localhost:5281/api/admin/Group/GetAll - - - 200 - application/json;+charset=utf-8 117.3809ms
