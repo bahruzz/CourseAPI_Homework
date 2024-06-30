@@ -61,5 +61,14 @@ namespace CourseApp.Controllers.Admin
             await _groupService.EditAsync(id, request);
             return Ok();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> SearchByName([FromQuery] string name)
+        {
+            _logger.LogInformation("Search method is working");
+            var data = await _groupService.SearchByName(name);
+            return Ok(data);
+
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Repository.Data;
 using Repository.Repostories.Interfaces;
 using Service.DTOs.Admin.Groups;
 using Service.DTOs.Admin.Students;
@@ -20,16 +22,19 @@ namespace Service.Services
         private readonly IStudentRepository _studentRepo;
         private readonly IMapper _mapper;
         private readonly ILogger<StudentService> _logger;
+        private readonly AppDbContext _context;
 
         public StudentService(IGroupRepository groupRepo,
                               IStudentRepository studentRepo,
                               IMapper mapper,
-                               ILogger<StudentService> logger)
+                               ILogger<StudentService> logger,
+                               AppDbContext context)
         {
             _groupRepo = groupRepo;
             _studentRepo = studentRepo;
             _mapper = mapper;
             _logger = logger;
+            _context = context;
         }
         public async Task CreateAsync(StudentCreateDto model)
         {
@@ -67,12 +72,16 @@ namespace Service.Services
         public async Task EditAsync(int id, StudentEditDto model)
         {
             if (model == null) throw new ArgumentNullException();
-            var data = await _studentRepo.GetById(id);
+            var data = await _studentRepo.GetByIdWithAsync(id);
 
-            if (data is null) throw new ArgumentNullException();
+            if (data is null) throw new NotFoundException("Student not found");
 
+            _context.StudentGroups.RemoveRange(data.StudentGroups);
+            foreach (var groupId in model.GroupId)
+            {
+                data.StudentGroups.Add(new StudentGroup { StudentId = data.Id, GroupId = groupId });
+            }
             var editData = _mapper.Map(model, data);
-
             await _studentRepo.EditAsync(editData);
         }
 
@@ -86,6 +95,14 @@ namespace Service.Services
             var data = _studentRepo.FindBy(m => m.Id == id, m => m.StudentGroups);
 
             return _mapper.Map<StudentDto>(data.FirstOrDefault());
+        }
+
+        public async Task<IEnumerable<StudentDto>> SearchByNameOrSurname(string nameOrSurname)
+        {
+            if (nameOrSurname == null) throw new NotFoundException("Name or surname is null");
+            var data = _mapper.Map<IEnumerable<StudentDto>>(await _studentRepo.SearchByNameOrSurname(nameOrSurname));
+
+            return data;
         }
     }
 }

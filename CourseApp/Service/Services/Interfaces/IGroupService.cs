@@ -14,5 +14,6 @@ namespace Service.Services.Interfaces
         Task<GroupDto> GetByIdAsync(int id);
         Task DeleteAsync(int id);
         Task EditAsync(int id, GroupEditDto model);
+        Task<IEnumerable<GroupDto>> SearchByName(string name);
     }
 }

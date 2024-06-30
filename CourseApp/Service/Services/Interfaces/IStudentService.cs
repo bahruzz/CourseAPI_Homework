@@ -15,5 +15,6 @@ namespace Service.Services.Interfaces
         Task<StudentDto> GetByIdAsync(int id);
         Task DeleteAsync(int id);
         Task EditAsync(int id, StudentEditDto model);
+        Task<IEnumerable<StudentDto>> SearchByNameOrSurname(string nameOrSurname);
     }
 }

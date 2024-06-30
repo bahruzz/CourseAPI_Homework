@@ -64,5 +64,14 @@ namespace CourseApp.Controllers.Admin
             await _studentService.EditAsync(id, request);
             return Ok();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> SearchByNameOrSurname([FromQuery] string nameOrSurname)
+        {
+            _logger.LogInformation("Search method is working");
+            var data = await _studentService.SearchByNameOrSurname(nameOrSurname);
+            return Ok(data);
+
+        }
     }
 }

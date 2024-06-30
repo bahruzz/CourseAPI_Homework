@@ -11,5 +11,9 @@ namespace Repository.Repostories.Interfaces
     public interface IStudentRepository : IBaseRepository<Student>
     {
         Task<IEnumerable<Student>> GetAllWithGroupsAsync();
+        Task<Student> GetByIdWithAsync(int? id);
+        Task<IEnumerable<Student>> SearchByNameOrSurname(string str);
+
+
     }
 }

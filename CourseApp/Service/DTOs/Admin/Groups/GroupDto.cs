@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Service.DTOs.Admin.Students;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,8 @@ namespace Service.DTOs.Admin.Groups
         public int Capacity { get; set; }
         public DateTime CreatedDate { get; set; }
         public int StudentCount { get; set; }
+        public string RoomName { get; set; }
+        public string EducationName { get; set; }       
+        public List<GroupTeacherDto> GroupTeachers { get; set; }
     }
 }

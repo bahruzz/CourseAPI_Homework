@@ -10,6 +10,8 @@ namespace Service.DTOs.Admin.Groups
     {
         public string Name { get; set; }
         public int Capacity { get; set; }
-        
+        public int RoomId { get; set; }
+        public int EducationId { get; set; }
+
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XSCKF9jAGX/AQxY35q0XL8veqW6aLs5ondU7oCPkvLsAezwKW9081HMSW6gG0bZ0lBC1yt39JIgRc+EGmJSU4A==",
+  "dgSpecHash": "TK2jVsIc0FuS/8DzwUILZ2lWW53khKERy8/hPHyuYfpFpkwaw/Go3YZWGcFXSPv5NmYvfZlNbv8ua1CaKl15aw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\Desktop\\PB101\\Backend\\Class_Practice\\CourseApp\\Service\\Service.csproj",
+  "projectFilePath": "C:\\Users\\user\\Desktop\\CourseAPI-Hometask\\CourseApp\\Service\\Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\fluentvalidation\\11.9.2\\fluentvalidation.11.9.2.nupkg.sha512",

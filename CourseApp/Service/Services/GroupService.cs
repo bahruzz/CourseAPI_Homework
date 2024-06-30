@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Repository.Repostories.Interfaces;
 using Service.DTOs.Admin.Groups;
+using Service.Helpers.Exceptions;
 using Service.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -68,9 +70,19 @@ namespace Service.Services
 
         public async Task<GroupDto> GetByIdAsync(int id)
         {
-            var data = _groupRepo.FindBy(m => m.Id == id, m => m.StudentGroups);
+            var data = _groupRepo.FindBy(m => m.Id == id, m => m.StudentGroups,m=>m.Room,m=>m.Education)
+                .Include(m=>m.GroupTeachers).ThenInclude(m=>m.Teacher);
 
             return _mapper.Map<GroupDto>(data.FirstOrDefault());
+        }
+
+        public async Task<IEnumerable<GroupDto>> SearchByName(string name)
+        {
+
+            if (name == null) throw new NotFoundException("Name is null");
+            var data = _mapper.Map<IEnumerable<GroupDto>>(await _groupRepo.SearchByName(name));
+
+            return data;
         }
     }
 }
